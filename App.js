@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
-import CategoryScreen from './screens/CategoryScreen';
 import { StatusBar } from 'expo-status-bar';
+import CategoryScreen from './screens/CategoryScreen';
+import OverviewScreen from './screens/OverviewScreen';
 
 // Navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -15,8 +16,9 @@ export default function App() {
       <StatusBar style="dark" />
       <NavigationContainer>
         <Stack.Navigator>
-          {/* A screen managed by the stack navigator. */}
-          <Stack.Screen name="MealsCategories" component={CategoryScreen} />
+          {/* Screens managed by the stack navigator. */}
+          <Stack.Screen name="Categories" component={CategoryScreen} />
+          <Stack.Screen name="Overview" component={OverviewScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
