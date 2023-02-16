@@ -12,10 +12,12 @@ function CategoryScreen ({navigation}) {
 
         // Called when the user selects a category item.
         function pressHandler() {
-            // Navigate to the overview page of the selected item.
-            navigation.navigate('Overview');
+            // Navigate to the overview page of the selected item and pass in its id.
+            navigation.navigate('Overview', {
+                categoryId: data.item.id
+            }); 
         }
-    
+
         return (
             <CategoryGridTile 
                 title={data.item.title} 
