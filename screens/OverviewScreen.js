@@ -14,14 +14,30 @@ function OverviewScreen ({ route }) {
     });
 
     function renderMealItem(data) {
+
+        const item = data.item;
+        
+        const mealItemProps = {
+            id: item.id,
+            title: item.title,
+            imageUrl: item.imageUrl,
+            affordability: item.affordability,
+            complexity: item.complexity,
+            duration: item.duration,
+        };
+
         return (
-            <MealItem title={data.item.title}/>
+            <MealItem {...mealItemProps}/>
         )
     }
     
     return (
         <View style={styles.container}>
-            <FlatList data={displayedMeals} keyExtractor={(item) => item.id} renderItem={renderMealItem} />
+            <FlatList 
+                data={displayedMeals} 
+                keyExtractor={(item) => item.id} 
+                renderItem={renderMealItem} 
+            />
         </View>
     )
 }
