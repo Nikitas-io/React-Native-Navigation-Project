@@ -4,6 +4,7 @@ import { MEALS } from "../data/dummy-data";
 import Subtitle from "../components/Subtitle";
 import List from "../components/List";
 import { useLayoutEffect } from "react";
+import IconButton from "../components/IconButton";
 
 function DetailScreen ({navigation, route}){
 
@@ -15,7 +16,7 @@ function DetailScreen ({navigation, route}){
       // Create a button on the top right corner of the header.
       navigation.setOptions({
         headerRight: () => {
-          return <Button title="Tap me!" onPress={headerButtonPressed} />
+          return <IconButton icon="star" color="white" buttonPressed={headerButtonPressed}/>
         }
       })
       
