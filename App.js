@@ -13,12 +13,29 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={
+            {
+              headerTintColor: 'white', // The header's text color.
+              headerStyle: { backgroundColor: 'crimson' }, // The header's background color.
+              contentStyle: { backgroundColor: 'white' } // The main content's background color.
+            }
+          }
+        >
           {/* Screens managed by the stack navigator. */}
-          <Stack.Screen name="Categories" component={CategoryScreen} />
-          <Stack.Screen name="Overview" component={OverviewScreen} />
+          <Stack.Screen 
+            name="Categories" 
+            component={CategoryScreen} 
+            options={{
+              title: 'Meal Categories',
+            }}
+          />
+          <Stack.Screen 
+            name="Overview" 
+            component={OverviewScreen} 
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>

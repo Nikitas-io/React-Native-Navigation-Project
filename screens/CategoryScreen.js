@@ -14,7 +14,8 @@ function CategoryScreen ({navigation}) {
         function pressHandler() {
             // Navigate to the overview page of the selected item and pass in its id.
             navigation.navigate('Overview', {
-                categoryId: data.item.id
+                categoryId: data.item.id,
+                title: data.item.title
             }); 
         }
 
