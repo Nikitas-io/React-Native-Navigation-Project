@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     mealItem: {
         margin: 16,
         borderRadius: 8,
-        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible', // We need overflow for the shadow on iOS.
         backgroundColor: 'white',
         elevation: 4,
         shadowColor: 'black',
