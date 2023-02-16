@@ -1,13 +1,14 @@
-import { StyleSheet, Text, ScrollView, Image } from "react-native";
+import { StyleSheet, Text, ScrollView, Image, View } from "react-native";
 import MealDetails from "../components/MealDetails";
 import { MEALS } from "../data/dummy-data";
+import Subtitle from "../components/Subtitle";
+import List from "../components/List";
 
 function DetailScreen ({route}){
     // Get the meail id from the params.
     const mealId = route.params.mealId;
     // Get the selected meal item from the data.
     const selectedMeal = MEALS.find((meal) => meal.id === mealId);
-    console.log('The selected meal: ', selectedMeal);
 
     return (
         <ScrollView style={styles.rootContainer}>
@@ -19,6 +20,15 @@ function DetailScreen ({route}){
                 affordability={selectedMeal.affordability}
                 textStyle={styles.detailText}
             />
+
+            <View style={styles.listOuterContainer}>
+                <View style={styles.listContainer}>
+                    <Subtitle>Ingredients</Subtitle>
+                    <List data={selectedMeal.ingredients} />
+                    <Subtitle>Steps</Subtitle>
+                    <List data={selectedMeal.steps} />
+                </View>
+            </View>
         </ScrollView>
     );
 }
@@ -38,15 +48,15 @@ const styles = StyleSheet.create({
       fontSize: 24,
       margin: 8,
       textAlign: 'center',
-      color: 'white',
+      color: 'black',
     },
     detailText: {
-      color: 'white',
+      color: 'black',
     },
     listOuterContainer: {
       alignItems: 'center',
     },
     listContainer: {
       width: '80%',
-    },
+    }
   });
