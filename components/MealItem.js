@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text, Pressable, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import MealDetails from "./MealDetails";
 
 function MealItem ({
     id,
@@ -10,13 +11,16 @@ function MealItem ({
     affordability,
   }) {
 
+    // We are using the useNavigation hook because this is not a screen component,
+    // and therefore the navigation prop cannot be passed to this component in another way.
     const navigation = useNavigation();
 
-    // function selectMealItemHandler() {
-    //     navigation.navigate(, {
-
-    //     });
-    // }
+    function selectMealItemHandler() {
+        // Navigate to the DetailScreen component.
+        navigation.navigate('Details', {
+            mealId: id
+        });
+    }
 
     return (
         <View style={styles.mealItem}>
@@ -30,11 +34,11 @@ function MealItem ({
                         <Image source={{ uri: imageUrl }} style={styles.image} />
                         <Text style={styles.title}>{title}</Text>
                     </View>
-                        {/* <MealDetails
-                            duration={duration}
-                            affordability={affordability}
-                            complexity={complexity}
-                        /> */}
+                    <MealDetails
+                        duration={duration}
+                        affordability={affordability}
+                        complexity={complexity}
+                    />
                 </View>
             </Pressable>
         </View>
@@ -58,7 +62,7 @@ const styles = StyleSheet.create({
     buttonPressed: {
         opacity: 0.5,
     },
-        innerContainer: {
+    innerContainer: {
         borderRadius: 8,
         overflow: 'hidden',
     },

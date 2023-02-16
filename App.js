@@ -6,6 +6,7 @@ import OverviewScreen from './screens/OverviewScreen';
 // Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import DetailScreen from './screens/DetailScreen';
 
 // Create a stack of screens.
 const Stack = createNativeStackNavigator();
@@ -35,6 +36,10 @@ export default function App() {
           <Stack.Screen 
             name="Overview" 
             component={OverviewScreen} 
+          />
+          <Stack.Screen
+            name="Details" 
+            component={DetailScreen} 
           />
         </Stack.Navigator>
       </NavigationContainer>
