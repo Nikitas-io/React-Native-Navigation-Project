@@ -46,7 +46,6 @@ export default function App() {
       <StatusBar style="light" />
 
       <FavouritesContextProvider>
-
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={
