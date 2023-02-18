@@ -10,6 +10,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import FavoritesScreen from './screens/FavoritesScreen';
 
+// Context
+import FavouritesContextProvider from './store/context/favorites-context';
+
 // Create a stack navigator.
 const Stack = createNativeStackNavigator();
 // Create a drawer navigator.
@@ -41,34 +44,38 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={
-            {
-              headerTintColor: 'white', // The header's text color.
-              headerStyle: { backgroundColor: 'crimson' }, // The header's background color.
-              contentStyle: { backgroundColor: 'white' } // The main content's background color.
+
+      <FavouritesContextProvider>
+
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={
+              {
+                headerTintColor: 'white', // The header's text color.
+                headerStyle: { backgroundColor: 'crimson' }, // The header's background color.
+                contentStyle: { backgroundColor: 'white' } // The main content's background color.
+              }
             }
-          }
-        >
-          {/* Screens managed by the stack navigator. */}
-          <Stack.Screen 
-            name="Drawer" 
-            component={DrawerNavigator} 
-            options={{
-              headerShown: false
-            }}
-          />
-          <Stack.Screen
-            name="Overview" 
-            component={OverviewScreen} 
-          />
-          <Stack.Screen
-            name="Details" 
-            component={DetailScreen} 
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+          >
+            {/* Screens managed by the stack navigator. */}
+            <Stack.Screen 
+              name="Drawer" 
+              component={DrawerNavigator} 
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="Overview" 
+              component={OverviewScreen} 
+            />
+            <Stack.Screen
+              name="Details" 
+              component={DetailScreen} 
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavouritesContextProvider>
     </>
   );
 }
