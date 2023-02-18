@@ -2,14 +2,40 @@ import { StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import CategoryScreen from './screens/CategoryScreen';
 import OverviewScreen from './screens/OverviewScreen';
+import DetailScreen from './screens/DetailScreen';
 
 // Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import DetailScreen from './screens/DetailScreen';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import FavoritesScreen from './screens/FavoritesScreen';
 
-// Create a stack of screens.
+// Create a stack navigator.
 const Stack = createNativeStackNavigator();
+// Create a drawer navigator.
+const Drawer = createDrawerNavigator();
+
+// Setup a drawer navigator component function.
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator
+      screenOptions={
+        {
+          headerTintColor: 'white', // The header's text color.
+          headerStyle: { backgroundColor: 'crimson' }, // The header's background color.
+          contentStyle: { backgroundColor: 'white' }, // The main content's background color.
+          // The background color of the active drawer element.
+          drawerActiveBackgroundColor: "crimson",
+          // The text color of the active drawer element.
+          drawerActiveTintColor: "white"
+        }
+      }
+    >
+      <Drawer.Screen name="Categories" component={CategoryScreen} />
+      <Drawer.Screen name="Favorites" component={FavoritesScreen} />
+    </Drawer.Navigator>
+  )
+}
 
 export default function App() {
   return (
@@ -27,13 +53,13 @@ export default function App() {
         >
           {/* Screens managed by the stack navigator. */}
           <Stack.Screen 
-            name="Categories" 
-            component={CategoryScreen} 
+            name="Drawer" 
+            component={DrawerNavigator} 
             options={{
-              title: 'Meal Categories',
+              headerShown: false
             }}
           />
-          <Stack.Screen 
+          <Stack.Screen
             name="Overview" 
             component={OverviewScreen} 
           />
@@ -47,11 +73,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
