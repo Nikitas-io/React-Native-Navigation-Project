@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import CategoryScreen from './screens/CategoryScreen';
 import OverviewScreen from './screens/OverviewScreen';
@@ -10,8 +9,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import FavoritesScreen from './screens/FavoritesScreen';
 
-// Context
-import FavouritesContextProvider from './store/context/favorites-context';
+// Redux
+import { Provider } from 'react-redux';
+import { store } from './store/redux/store';
 
 // Create a stack navigator.
 const Stack = createNativeStackNavigator();
@@ -45,7 +45,8 @@ export default function App() {
     <>
       <StatusBar style="light" />
 
-      <FavouritesContextProvider>
+      {/* Wrap the app in the Redux Store provider and pass the store to it */}
+      <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={
@@ -74,7 +75,7 @@ export default function App() {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </FavouritesContextProvider>
+      </Provider>
     </>
   );
 }

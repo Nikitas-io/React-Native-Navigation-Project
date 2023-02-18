@@ -1,11 +1,14 @@
 import { StyleSheet, Text, ScrollView, Image, View } from "react-native";
-import MealDetails from "../components/MealDetails";
 import { MEALS } from "../data/dummy-data";
-import Subtitle from "../components/Subtitle";
+import { useLayoutEffect } from "react";
+
 import List from "../components/List";
-import { useContext, useLayoutEffect } from "react";
+import MealDetails from "../components/MealDetails";
+import Subtitle from "../components/Subtitle";
 import IconButton from "../components/IconButton";
-import { FavoritesContext } from "../store/context/favorites-context";
+
+import { useSelector, useDispatch } from "react-redux";
+import { addFavorite, removeFavorite } from "../store/redux/favorites";
 
 function DetailScreen ({navigation, route}){
 
@@ -14,16 +17,21 @@ function DetailScreen ({navigation, route}){
     // Get the selected meal item from the data.
     const selectedMeal = MEALS.find((meal) => meal.id === mealId);
     
-    // Fetch the favorites context.
-    const favoriteMealsContext = useContext(FavoritesContext);
-    // Find out if the selected meal is a favorite using context.
-    const mealIsFavorite = favoriteMealsContext.ids.includes(mealId);
+    // Fetch the favorites from the redux store.
+    const favoriteMealIds = useSelector((state) => state.favoriteMeals.ids)
+    // Find out if the selected meal is included in the favorites of the store.
+    const mealIsFavorite = favoriteMealIds.includes(mealId);
+
+    // Initialize the dispatcher.
+    const dispatch = useDispatch();
 
     function changeFavoriteStatus() {
       if(mealIsFavorite) {
-        favoriteMealsContext.removeFavorite(mealId);
+        // Dispatch the action to remove a meal from the reducer.
+        dispatch(removeFavorite({id: mealId}));
       } else {
-        favoriteMealsContext.addFavorite(mealId);
+        // Dispatch the action to add a meal to the reducer.
+        dispatch(addFavorite({id: mealId}));
       }
     }
 
